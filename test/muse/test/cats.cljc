@@ -43,15 +43,16 @@
      (t/is (= 10 (muse/run!! (m/fmap count (ListData. 10)))))
      (t/is (= 15 (muse/run!! (m/bind (SingleData. 10) (fn [num] (SingleData. (+ 5 num)))))))))
 
-#?(:cljs
-   (t/deftest runner-macros
-     ;; Stuck here because can't find run!
-     #_(async done (go (run! (m/fmap count (ListData. 5)))))
-     #_(async done
-            (go
-              (is (= 5 (ListData. 5)))))
-     #_(t/is (= 10 (muse/run!! (m/fmap count (ListData. 10)))))
-     #_(t/is (= 15 (muse/run!! (m/bind (SingleData. 10) (fn [num] (SingleData. (+ 5 num)))))))))
+(comment
+  #?(:cljs
+     (t/deftest runner-macros
+       ;; Stuck here because can't find run!
+       #_(async done (go (run! (m/fmap count (ListData. 5)))))
+       #_(async done
+                (go
+                  (is (= 5 (ListData. 5)))))
+       #_(t/is (= 10 (muse/run!! (m/fmap count (ListData. 10)))))
+       #_(t/is (= 15 (muse/run!! (m/bind (SingleData. 10) (fn [num] (SingleData. (+ 5 num))))))))))
 
 (comment
 
