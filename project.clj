@@ -5,7 +5,22 @@
             :url "http://opensource.org/licenses/MIT"
             :distribution :repo}
   :global-vars {*warn-on-reflection* false}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [org.clojure/clojurescript "0.0-3308"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cats "0.4.0"]]
+  :plugins      [[lein-cljsbuild "1.0.6"]]
+  :cljsbuild {:test-commands {"test" ["node" "output/tests.js"]}
+              :builds [{:id "test"
+                        :source-paths ["src" "test"]
+                        :notify-command ["node" "output/tests.js"]
+                        :compiler {:output-to "output/tests.js"
+                                   :output-dir "output"
+                                   :source-map true
+                                   :static-fns true
+                                   :cache-analysis false
+                                   :main muse.runner
+                                   :optimizations :none
+                                   :target :nodejs
+                                   :pretty-print true}}]}
   :signing {:gpg-key "kachayev@gmail.com"})
